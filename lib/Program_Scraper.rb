@@ -1,6 +1,2 @@
-require "Program_Scraper/version"
-
-module ProgramScraper
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative './Program_Scraper/version'
+require_relative './Program_Scraper/cli'

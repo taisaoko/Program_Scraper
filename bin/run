@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/Program_Scraper'
+
+ProgramScraper::CLI.new.call
