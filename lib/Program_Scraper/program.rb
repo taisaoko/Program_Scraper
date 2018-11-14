@@ -1,17 +1,18 @@
 class ProgramScraper::Program
+attr_accessor :name, :credit, :career, :url
   
   def self.all
     # return a bunch of instances of Program
-    puts <<-DOC.gsub /^\s*/,''
+    # puts <<-DOC.gsub /^\s*/,''
     
-    1. Business Management
-    2. Business Transfer
-    3. Corrections
-    4. Health Information Management Technician
-    5. Law Enforcement
-    6. Supervisory Skills
-    7. Supply Chain Management
-    DOC
+    # 1. Business Management - 30 credit hours
+    # 2. Business Transfer - 30 credit hours
+    # 3. Corrections
+    # 4. Health Information Management Technician
+    # 5. Law Enforcement
+    # 6. Supervisory Skills
+    # 7. Supply Chain Management
+    # DOC
     
     program_1 = self.new
     program_1.name = "Business Management"
