@@ -7,14 +7,19 @@ My bin file(./bin/run) creates a new incident of my controller CLI by calling th
 User types program-scraper
 
 Show a list of programs:
+#self.all
 
-    1. Business Management
-    2. Business Transfer
-    3. Corrections
-    4. Health Information Management Technician
-    5. Law Enforcement
-    6. Supervisory Skills
-    7. Supply Chain Management
+    # return a bunch of instances of Program
+    # puts <<-DOC.gsub /^\s*/,''
+    
+    # 1. Business Management - 30 credit hours
+    # 2. Business Transfer - 30 credit hours
+    # 3. Corrections
+    # 4. Health Information Management Technician
+    # 5. Law Enforcement
+    # 6. Supervisory Skills
+    # 7. Supply Chain Management
+    # DOC
 
 Which programs do you want to know more about?
 

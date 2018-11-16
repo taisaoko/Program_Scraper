@@ -2,18 +2,16 @@ class ProgramScraper::Program
 attr_accessor :name, :credit, :career, :url
   
   def self.all
-    # return a bunch of instances of Program
-    # puts <<-DOC.gsub /^\s*/,''
-    
-    # 1. Business Management - 30 credit hours
-    # 2. Business Transfer - 30 credit hours
-    # 3. Corrections
-    # 4. Health Information Management Technician
-    # 5. Law Enforcement
-    # 6. Supervisory Skills
-    # 7. Supply Chain Management
-    # DOC
-    
+    # Scrape Sinclair website and return programs based on that data
+    # ProgramScraper::Scraper.new("http://sinclair.edu/academics/online/")
+    self.scrape_programs
+  end
+  
+  def self.scrape_programs
+    programs = []
+    # Go to Sinclair
+    # Find the program
+    # instantiate a program
     program_1 = self.new
     program_1.name = "Business Management"
     program_1.credit = "30 Credit Hours"
@@ -26,7 +24,7 @@ attr_accessor :name, :credit, :career, :url
     program_2.career = "Employers more often than in the past require four-year business degrees or evidence that students are in the process of earning these credentials. This certificate serves as a credentialing tool for students to use in their career search, as well as, for currently employed students to show further evidence of growth and academic progress toward a bachelor's degree in business."
     program_2.url = "http://sinclair.edu/program/params/programCode/BUS-S-CRT/"
     
-    [program_1, program_2]
+    programs
   end
   
   
