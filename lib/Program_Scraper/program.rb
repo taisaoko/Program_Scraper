@@ -9,6 +9,7 @@ attr_accessor :name, :credit, :career, :url
   
   def self.scrape_programs
     programs = []
+    programs << self.scrape_sinclair
     # Go to Sinclair
     # Find the program
     # instantiate a program
@@ -25,6 +26,11 @@ attr_accessor :name, :credit, :career, :url
     program_2.url = "http://sinclair.edu/program/params/programCode/BUS-S-CRT/"
     
     programs
+  end
+  
+  def self.scrape_sinclair
+    doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
+    binding.pry
   end
   
   
