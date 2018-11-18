@@ -35,8 +35,11 @@ class ProgramScraper::Scraper
       
       # end
     program_page[:degree_type] = doc.css("div.row h5")[1].text
-    program_page[:contact] = doc.css("div.panel_body")
-    program_page[:career_opportunity] = doc.css("p")[4].text
+    #program_page[:contact] = doc.css("div.c-4.nr.nt ul:nth-child(10) li:nth-child(1)").text.split("+").join(". Tel: +")
+    program_page[:about] = doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+    program_page[:contact] = doc.css("div.panel-body").text.split.join(" ")
+    program_page[:career_opportunity] = doc.css("p")[3].text
+    
     binding.pry
     program_page
   end
