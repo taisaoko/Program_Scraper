@@ -26,6 +26,6 @@ Which programs do you want to know more about?
 - What is a program?
 A program has a name
 A program has a URL
-A program has a number of credits
-A program has a career opportunity
+A program has a type of degree
+A program has an "about" section
 A program has a contact

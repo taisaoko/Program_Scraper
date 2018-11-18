@@ -9,7 +9,7 @@ class ProgramScraper::CLI
   def list_programs
     # get programs
     # Here Doc
-    puts "Sinclair's Online One-Year Certificate Programs:"
+    puts "Sinclair's Online Programs:"
     @programs = ProgramScraper::Scraper.scrape_index_page
     @programs.each.with_index(1) do |program, i|
       puts "#{i}. #{program}"
