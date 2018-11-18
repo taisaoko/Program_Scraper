@@ -32,13 +32,11 @@ attr_accessor :name, :credit, :career, :url
     doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
     program_list = []
     
-      doc.css("ul").children.each.with_index do |children, i|
-        index_list = [111, 113, 117, 119, 121, 123]
-        if index_list.include?(i)
-        program_list << children.text
-        end
-      end
+    doc.css(".col-xl-8.col-12 ul li a").children.each do |children|
+      program_list << children.text
+    end
     program_list
+    binding.pry
     
   end
   
