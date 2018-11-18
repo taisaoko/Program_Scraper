@@ -3,17 +3,16 @@ class ProgramScraper::CLI
   
   def call
     list_programs
-    detail
-    goodbye
+    
   end
   
   def list_programs
     # get programs
     # Here Doc
     puts "Sinclair's Online One-Year Certificate Programs:"
-    @programs = ProgramScraper::Program.all
+    @programs = ProgramScraper::Scraper.scrape_index_page
     @programs.each.with_index(1) do |program, i|
-      puts "#{i}. #{program.name} - #{program.credit}"
+      puts "#{i}. #{program}"
     end
   end
     

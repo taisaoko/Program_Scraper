@@ -36,7 +36,7 @@ attr_accessor :name, :credit, :career, :url
       program_list << children.text
     end
     program_list
-    binding.pry
+    
     
   end
   
