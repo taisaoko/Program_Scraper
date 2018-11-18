@@ -30,7 +30,16 @@ attr_accessor :name, :credit, :career, :url
   
   def self.scrape_sinclair
     doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
-    binding.pry
+    program_list = []
+    
+      doc.css("ul").children.each.with_index do |children, i|
+        index_list = [111, 113, 117, 119, 121, 123]
+        if index_list.include?(i)
+        program_list << children.text
+        end
+      end
+    program_list
+    
   end
   
   
