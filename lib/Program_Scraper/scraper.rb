@@ -21,24 +21,17 @@ class ProgramScraper::Scraper
     doc = Nokogiri::HTML(html)
     program_page = {}
    
-      # doc.css(".social-icon-container a").each do |a|
-        
-      #   if (a.attribute("href").value).include?("twitter")
-      #     student_page[:twitter] = a.attribute("href").value
-      #   elsif (a.attribute("href").value).include?("linkedin")
-      #     student_page[:linkedin] = a.attribute("href").value
-      #   elsif (a.attribute("href").value).include?("github")  
-      #     student_page[:github] = a.attribute("href").value
-      #   else 
-      #     student_page[:blog] = a.attribute("href").value
-      #   end
+      #program_page[:contact] = doc.css("div.c-4.nr.nt ul:nth-child(10) li:nth-child(1)").text.split("+").join(". Tel: +")
       
-      # end
-    program_page[:degree_type] = doc.css("div.row h5")[1].text
-    #program_page[:contact] = doc.css("div.c-4.nr.nt ul:nth-child(10) li:nth-child(1)").text.split("+").join(". Tel: +")
+    program_page[:name] = doc.css(".row h1").text  
+    program_page[:degree_type] = doc.css(".row h5")[1].text
     program_page[:about] = doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
-    program_page[:contact] = doc.css("div.panel-body").text.split.join(" ")
-    program_page[:career_opportunity] = doc.css("p")[3].text
+    program_page[:contact] = doc.css(".panel-body").text.split.join(" ")
+      if program_page[:contact] == ""
+        program_page[:career_opportunity] = doc.css("p")[1].text
+      else 
+        program_page[:career_opportunity] = doc.css("p")[3].text
+      end  
     
     binding.pry
     program_page
