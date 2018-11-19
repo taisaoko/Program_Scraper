@@ -1,10 +1,9 @@
 class ProgramScraper::Program
-attr_accessor :name, :credit, :career, :url
+attr_accessor :name, :degree_type,  :contact, :division, :department,:about, :outcomes, :career_opportunity
   
+  @@all = []
   def self.all
-    # Scrape Sinclair website and return programs based on that data
-    # ProgramScraper::Scraper.new("http://sinclair.edu/academics/online/")
-    self.scrape_programs
+    @@all 
   end
   
   def self.scrape_programs

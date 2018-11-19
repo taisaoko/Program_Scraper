@@ -5,6 +5,7 @@ require 'pry'
 class ProgramScraper::Scraper
 
   def self.scrape_index_page
+    # Scrape Sinclair website and return programs based on that data ("http://sinclair.edu/academics/online/")
     doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
     program_list = []
     
@@ -17,6 +18,7 @@ class ProgramScraper::Scraper
   
   
   def self.scrape_program_page(url)
+    # Scrape Sinclair's individual program website and return more info (url)
     html = open(url)
     doc = Nokogiri::HTML(html)
     program_page = {}
