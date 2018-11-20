@@ -6,6 +6,15 @@ attr_accessor :name, :degree_type,  :contact, :division, :department,:about, :ou
     @@all 
   end
   
+  def self.new_from_index_page(r)
+    self.new(
+      r.css("h2").text,
+      "https://www.sinclair.edu#{r.css("a").attribute("href").text}",
+      r.css("h3").text,
+      r.css(".position").text
+      )
+  end
+  
   def self.scrape_programs
     programs = []
     programs << self.scrape_sinclair
@@ -25,18 +34,6 @@ attr_accessor :name, :degree_type,  :contact, :division, :department,:about, :ou
     program_2.url = "http://sinclair.edu/program/params/programCode/BUS-S-CRT/"
     
     programs
-  end
-  
-  def self.scrape_sinclair
-    doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
-    program_list = []
-    
-    doc.css(".col-xl-8.col-12 ul li a").children.each do |children|
-      program_list << children.text
-    end
-    program_list
-    
-    
   end
   
   

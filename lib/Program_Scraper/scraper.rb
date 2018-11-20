@@ -12,6 +12,7 @@ class ProgramScraper::Scraper
     doc.css(".col-xl-8.col-12 ul li a").children.each do |children|
       program_list << children.text
     end
+    
     program_list
     
   end
