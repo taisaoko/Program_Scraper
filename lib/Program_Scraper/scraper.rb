@@ -9,12 +9,17 @@ class ProgramScraper::Scraper
     doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
     program_list = []
     
-    doc.css(".col-xl-8.col-12 ul li a").children.each do |children|
+    doc.css(".col-xl-8.col-12 ul li").children.each do |children|
       program_list << children.text
     end
-    
     program_list
     
+  end
+  
+  def program_details
+    self.scrape_index_page.each do |r|
+      ProgramScraper::Program.new_from_index_page(r)
+    end
   end
   
   

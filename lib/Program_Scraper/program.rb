@@ -1,20 +1,31 @@
 class ProgramScraper::Program
-attr_accessor :name, :degree_type,  :contact, :division, :department,:about, :outcomes, :career_opportunity
+attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about, :outcomes, :career_opportunity
   
   @@all = []
+  
+  def self.new_from_index_page(r)
+    self.new(
+      r.text,
+      "https://www.sinclair.edu#{r.css("a").attribute("href").text}",
+      )
+  end
+  
+  def initialize(name=nil, url=nil)
+    @name = name
+    @url = url
+    @@all << self
+  end
+  
   def self.all
     @@all 
   end
   
-  def self.new_from_index_page(r)
-    self.new(
-      r.css("h2").text,
-      "https://www.sinclair.edu#{r.css("a").attribute("href").text}",
-      r.css("h3").text,
-      r.css(".position").text
-      )
+  def doc
+    @doc ||= Nokogiri::HTML(open(self.url))
   end
   
+  def degree_type
+    @degree_type =
   def self.scrape_programs
     programs = []
     programs << self.scrape_sinclair
