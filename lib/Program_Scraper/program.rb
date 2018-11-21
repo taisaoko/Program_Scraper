@@ -47,14 +47,14 @@ attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about
   end
   
   def outcomes
-    @outcomes] ||= doc.css("section.col-md-9.col-sm-8.col-12.content ul li").text
+    @outcomes ||= doc.css("section.col-md-9.col-sm-8.col-12.content ul li").text
   end
   
   def career_opportunity
-    if @contact] == ""
-      @career_opportunity] = doc.css("p")[1].text
+    if @contact == ""
+      @career_opportunity = doc.css("p")[1].text
     else 
-      @career_opportunity] = doc.css("p")[3].text
+      @career_opportunity = doc.css("p")[3].text
     end
   end
   

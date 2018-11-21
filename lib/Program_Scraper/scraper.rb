@@ -7,13 +7,7 @@ class ProgramScraper::Scraper
   def self.scrape_index_page
     # Scrape Sinclair website and return programs based on that data ("http://sinclair.edu/academics/online/")
     doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
-    program_list = []
-    
-    doc.css(".col-xl-8.col-12 ul li").children.each do |children|
-      program_list << children.text
-    end
-    program_list
-    
+    doc.css(".col-xl-8.col-12 ul li")
   end
   
   def program_details
