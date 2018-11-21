@@ -25,7 +25,39 @@ attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about
   end
   
   def degree_type
-    @degree_type =
+    @degree_type ||= doc.css(".row h5")[1].text
+  end
+  
+  def contact
+    @contact ||= doc.css(".panel-body").text.split.join(" ")
+  end
+  
+  def division
+    @division ||= doc.css("a")[30].text 
+    #doc.css("a")[30].attributes("href").text
+  end
+  
+  def department
+    @department ||= doc.css("a")[31].text 
+    #doc.css("a")[30].attributes("href").text
+  end
+  
+  def about
+    @about ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+  end
+  
+  def outcomes
+    @outcomes] ||= doc.css("section.col-md-9.col-sm-8.col-12.content ul li").text
+  end
+  
+  def career_opportunity
+    if @contact] == ""
+      @career_opportunity] = doc.css("p")[1].text
+    else 
+      @career_opportunity] = doc.css("p")[3].text
+    end
+  end
+  
   def self.scrape_programs
     programs = []
     programs << self.scrape_sinclair
