@@ -4,8 +4,7 @@ attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about
   @@all = []
   
   def self.new_from_index_page(r)
-    self.new(
-      r.text,
+    self.new(r.text,
       "https://www.sinclair.edu#{r.css("a").attribute("href").text}",
       )
   end

@@ -11,7 +11,7 @@ class ProgramScraper::Scraper
   end
   
   def program_details
-    self.scrape_index_page.each do |r|
+    self.class.scrape_index_page[0...-1].each do |r|
       ProgramScraper::Program.new_from_index_page(r)
     end
   end
