@@ -1,12 +1,11 @@
 class ProgramScraper::Program
-attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about, :outcomes, :career_opportunity
+attr_accessor :name, :url, :degree_type, :contact, :division, :department, :description, :outcomes, :career_opportunity
   
   @@all = []
   
   def self.new_from_index_page(r)
     self.new(r.text,
-      "https://www.sinclair.edu#{r.css("a").attribute("href").text}",
-      )
+      "https://www.sinclair.edu#{r.css("a").attribute("href").text}")
   end
   
   def initialize(name=nil, url=nil)
@@ -21,6 +20,10 @@ attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about
   
   def doc
     @doc ||= Nokogiri::HTML(open(self.url))
+  end
+  
+  def self.find(id)
+    self.all[id-1]
   end
   
   def degree_type
@@ -41,8 +44,8 @@ attr_accessor :name,:url, :degree_type,  :contact, :division, :department,:about
     #doc.css("a")[30].attributes("href").text
   end
   
-  def about
-    @about ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+  def description 
+    @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
   end
   
   def outcomes
