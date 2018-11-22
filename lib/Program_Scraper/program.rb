@@ -45,7 +45,11 @@ attr_accessor :name, :url, :degree_type, :contact, :division, :department, :desc
   end
   
   def description 
-    @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+    if @contact == ""
+      @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+    else 
+      @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[12].text.split.join(" ")
+    end
   end
   
   def outcomes
