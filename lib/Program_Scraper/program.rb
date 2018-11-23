@@ -44,25 +44,26 @@ attr_accessor :name, :url, :degree_type, :contact, :division, :department, :desc
     #doc.css("a")[30].attributes("href").text
   end
   
-  def description 
-    if @contact == ""
-      @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
-    else 
-      @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[12].text.split.join(" ")
-    end
-  end
-  
   def outcomes
     @outcomes ||= doc.css("section.col-md-9.col-sm-8.col-12.content ul li").text
   end
   
-  def career_opportunity
-    if @contact == ""
-      @career_opportunity = doc.css("p")[1].text
-    else 
-      @career_opportunity = doc.css("p")[3].text
-    end
-  end
+  # def description 
+  #   if @contact == ""
+  #     @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+  #   else 
+  #     @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[12].text.split.join(" ")
+  #   end
+  # end
+  
+  
+  # def career_opportunity
+  #   if @contact == ""
+  #     @career_opportunity = doc.css("p")[1].text
+  #   else 
+  #     @career_opportunity = doc.css("p")[3].text
+  #   end
+  # end
   
   def self.scrape_programs
     programs = []
