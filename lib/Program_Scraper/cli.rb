@@ -27,7 +27,7 @@ class ProgramScraper::CLI
       elsif input == "list"
         list_programs
       elsif input == "exit"
-        puts "Goodbye! Thanks for checking our app."
+        puts "Goodbye! Thanks for checking our CLI app."
       else
         puts "Not sure what you want, type list or exit."
       end
