@@ -30,7 +30,7 @@ A program has a type of degree
 A program has a contact
 A program has an outcome
 
-First #scrape_program in ProgramScraper::Program
+FIRST #SCRAPE_PROGRAM IN PROGRAMSCRAPER::PROGRAM
 def self.scrape_programs
     programs = []
     programs << self.scrape_sinclair
@@ -52,7 +52,7 @@ def self.scrape_programs
     programs
 end
 
-Second #scrape_program in ProgramScraper::Scraper
+SECOND #SCRAPE_PROGRAM IN PROGRAMSCRAPER::SCRAPER
 def self.scrape_program(url)
     # Scrape Sinclair's individual program website and return more info (url)
     html = open(url)
@@ -81,7 +81,7 @@ def self.scrape_program(url)
     program_page
 end
 
-Old complete ProgramScraper::Program version:
+OLD COMPLETE PROGRAMSCRAPER::PROGRAM VERSION:
 def self.new_from_index_page(r)
     self.new(r.text,
       "https://www.sinclair.edu#{r.css("a").attribute("href").text}")
@@ -109,7 +109,7 @@ def self.new_from_index_page(r)
     @degree_type ||= doc.css(".row h5")[1].text
   end
 
-Old complete ProgramScraper::Scraper version:
+OLD COMPLETE PROGRAMSCRAPER::SCRAPER VERSION:
 class ProgramScraper::Scraper
   def self.scrape_index_page
     # Scrape Sinclair website and return programs based on that data ("http://sinclair.edu/academics/online/")
