@@ -53,7 +53,7 @@ def self.scrape_programs
 end
 
 Second #scrape_program in ProgramScraper::Scraper
-def self.scrape_program_page(url)
+def self.scrape_program(url)
     # Scrape Sinclair's individual program website and return more info (url)
     html = open(url)
     doc = Nokogiri::HTML(html)
@@ -71,7 +71,57 @@ def self.scrape_program_page(url)
     else 
       program_page[:career_opportunity] = doc.css("p")[3].text
     end  
-    
+    if program.contact == ""
+      program.description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
+    else 
+      description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[12].text.split.join(" ")
+    end
+  
     binding.pry
     program_page
 end
+
+Old complete ProgramScraper::Program version:
+def self.new_from_index_page(r)
+    self.new(r.text,
+      "https://www.sinclair.edu#{r.css("a").attribute("href").text}")
+  end
+  
+  def initialize(name=nil, url=nil)
+    @name = name
+    @url = url
+    @@all << self
+  end
+  
+  def self.all
+    @@all 
+  end
+  
+  def doc
+    @doc ||= Nokogiri::HTML(open(self.url))
+  end
+  
+  def self.find(id)
+    self.all[id-1]
+  end
+  
+  def degree_type
+    @degree_type ||= doc.css(".row h5")[1].text
+  end
+
+Old complete ProgramScraper::Scraper version:
+class ProgramScraper::Scraper
+  def self.scrape_index_page
+    # Scrape Sinclair website and return programs based on that data ("http://sinclair.edu/academics/online/")
+    doc = Nokogiri::HTML(open("http://sinclair.edu/academics/online/"))
+    doc.css(".col-xl-8.col-12 ul li")
+  end
+  
+  def program_details
+    self.class.scrape_index_page[0...-1].each do |r|
+      ProgramScraper::Program.new_from_index_page(r)
+    end
+  end
+end
+  
+  

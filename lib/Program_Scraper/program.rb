@@ -3,11 +3,6 @@ attr_accessor :name, :url, :degree_type, :contact, :division, :department, :desc
   
   @@all = []
   
-  def self.new_from_index_page(r)
-    self.new(r.text,
-      "https://www.sinclair.edu#{r.css("a").attribute("href").text}")
-  end
-  
   def initialize(name=nil, url=nil)
     @name = name
     @url = url
@@ -15,54 +10,10 @@ attr_accessor :name, :url, :degree_type, :contact, :division, :department, :desc
   end
   
   def self.all
-    @@all 
-  end
-  
-  def doc
-    @doc ||= Nokogiri::HTML(open(self.url))
+    @@all
   end
   
   def self.find(id)
     self.all[id-1]
   end
-  
-  def degree_type
-    @degree_type ||= doc.css(".row h5")[1].text
-  end
-  
-  def contact
-    @contact ||= doc.css(".panel-body").text.split.join(" ")
-  end
-  
-  def division
-    @division ||= doc.css("a")[30].text 
-    #doc.css("a")[30].attributes("href").text
-  end
-  
-  def department
-    @department ||= doc.css("a")[31].text 
-    #doc.css("a")[30].attributes("href").text
-  end
-  
-  def outcomes
-    @outcomes ||= doc.css("section.col-md-9.col-sm-8.col-12.content ul li").text
-  end
-  
-  # def description 
-  #   if @contact == ""
-  #     @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[10].text.split.join(" ")
-  #   else 
-  #     @description ||= doc.css(".col-md-9.col-sm-8.col-12.content").children[12].text.split.join(" ")
-  #   end
-  # end
-  
-  
-  # def career_opportunity
-  #   if @contact == ""
-  #     @career_opportunity = doc.css("p")[1].text
-  #   else 
-  #     @career_opportunity = doc.css("p")[3].text
-  #   end
-  # end
-  
 end

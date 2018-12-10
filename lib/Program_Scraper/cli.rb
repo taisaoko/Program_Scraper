@@ -2,17 +2,15 @@
 class ProgramScraper::CLI
   
   def call
-    ProgramScraper::Scraper.new.program_details
+    ProgramScraper::Scraper.program_details
     puts "Welcome to the Sinclair's Online Programs"
     list_programs
     start
-    goodbye
   end
   
   def list_programs
     # get programs
-    @programs = ProgramScraper::Program.all
-    @programs.each.with_index(1) do |program, i|
+    ProgramScraper::Program.all.each.with_index(1) do |program, i|
       puts "#{i}. #{program.name}"
     end
   end
@@ -22,11 +20,14 @@ class ProgramScraper::CLI
     while input != "exit"
       puts "Enter the number of the program you'd like more info on or or type list to see the programs again or type exit to exit:"
       input = gets.strip.downcase
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= ProgramScraper::Program.all.size 
         program = ProgramScraper::Program.find(input.to_i)
+        ProgramScraper::Scraper.scrape_details(program) if program.degree_type == nil
         print_program(program)
       elsif input == "list"
         list_programs
+      elsif input == "exit"
+        puts "Goodbye! Thanks for checking our app."
       else
         puts "Not sure what you want, type list or exit."
       end
@@ -44,19 +45,6 @@ class ProgramScraper::CLI
     puts "---------------Outcomes--------------" 
     puts ""
     puts "#{program.outcomes}"
-    # puts ""
-    # puts "--------Career Opportunities---------"
-    # puts ""
-    # puts "#{program.career_opportunity}"
-    # puts ""
-    # puts "---------------Description--------------"
-    # puts ""
-    # puts "#{program.description}"
-    # puts ""
   end
   
-  def goodbye
-    puts "Goodbye! Thanks for checking our app."
-  end
-    
 end
